@@ -1,0 +1,22 @@
+GET http://localhost:5000/product
+
+###
+GET http://localhost:5000/product/9
+
+###
+POST http://localhost:5000/product
+Content-Type: application/json
+
+{
+    "nama_barang" : "BAJU",
+    "stock" : 100
+}
+
+###
+PATCH  http://localhost:5000/product/9
+Content-Type: application/json
+
+{
+    "nama_barang" : "BAJU edit 2",
+    "stock" : 19
+}
