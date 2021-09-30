@@ -12,11 +12,12 @@ app.use(expressLayouts);
 export const getAllproduct = async (req,res)=>{
 try {
     const products = await product.findAll();
-    res.render('index',{
-        title : "home",
-        layout : "layouts/main-layout",
-        products,
-    })
+    res.json(products)
+    // res.render('index',{
+    //     title : "home",
+    //     layout : "layouts/main-layout",
+    //     products,
+    // })
 } catch (error) {
     console.log(error)
 }
@@ -24,8 +25,9 @@ try {
 
 export const createProduct = async (req,res)=>{
     try {
+        res.json(req.body)
         await product.create(req.body);
-        res.json({"message" : "berhasil di simpan"})
+        res.redirect('/product')
     } catch (error) {
         console.log(error)
     }

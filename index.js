@@ -1,7 +1,10 @@
 import express from "express";
 import db from "./config/database.js"
 import product from "./route/index.js"
+import home from "./route/home.js"
 import expressLayouts from "express-ejs-layouts"
+
+
 
 
 
@@ -9,6 +12,7 @@ const app = express();
 const port = 5000;
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
+app.use(express.urlencoded());
 
 try {
     await db.authenticate();
@@ -19,11 +23,9 @@ try {
 
 app.use(express.json())
 app.use('/product',product);
-app.get('/form-tambah',(req,res)=>{
-    res.render('form',{
-        title : "fotm tambah",
-        layout : "layouts/main-layout"
-    })
+app.use('/form-tambah', home);
+app.post('/tambah',(req,res)=>{
+    console.log(req.body);
 })
 
 app.listen(port,()=>{
