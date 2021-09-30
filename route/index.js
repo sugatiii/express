@@ -7,10 +7,12 @@ deleteProduct
 } from "../controller/index.js"
 const router = express.Router();
 
+router.get('/:id',deleteProduct);
 router.get('/',getAllproduct);
-router.get('/:id',getProductbyId);
+// router.get('/:id',getProductbyId);
 router.post('/',createProduct);
 router.patch('/:id',updateProduct);
-router.delete('/:id',deleteProduct);
+
+
 
 export default router;

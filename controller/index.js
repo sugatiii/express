@@ -1,9 +1,22 @@
-import product from "../models/data.js"
+import product from "../models/data.js";
+import express from 'express';
+import expressLayouts from 'express-ejs-layouts';
+
+const app = express();
+app.set('view engine', 'ejs');
+
+app.use(expressLayouts);
+
+ 
 
 export const getAllproduct = async (req,res)=>{
 try {
     const products = await product.findAll();
-    res.json(products)
+    res.render('index',{
+        title : "home",
+        layout : "layouts/main-layout",
+        products,
+    })
 } catch (error) {
     console.log(error)
 }
@@ -54,9 +67,7 @@ export const deleteProduct = async (req,res)=>{
                 id :req.params.id
             }
         })
-        res.json({
-            "message" : "product deleted"
-        }) 
+        res.redirect('/product')
     } catch (error) {
         console.log(error)
     }

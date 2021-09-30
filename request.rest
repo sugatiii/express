@@ -4,7 +4,7 @@ GET http://localhost:5000/product
 GET http://localhost:5000/product/9
 
 ###
-DELETE  http://localhost:5000/product/9
+DELETE  http://localhost:5000/product/10
 
 ###
 POST http://localhost:5000/product
