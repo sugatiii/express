@@ -45,4 +45,19 @@ export const updateProduct = async (req,res)=>{
     } catch (error) {
         console.log(error)
     }
+}
+
+export const deleteProduct = async (req,res)=>{
+    try {
+        await product.destroy({
+            where : {
+                id :req.params.id
+            }
+        })
+        res.json({
+            "message" : "product deleted"
+        }) 
+    } catch (error) {
+        console.log(error)
     }
+}
