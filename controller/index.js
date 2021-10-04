@@ -1,11 +1,30 @@
 import product from "../models/data.js";
 import express from 'express';
 import expressLayouts from 'express-ejs-layouts';
+import {body,check} from "express-validator";
+import session from "express-session";
+import cookieParser from "cookie-parser";
+import flash from "connect-flash";
+
 
 const app = express();
 app.set('view engine', 'ejs');
 
 app.use(expressLayouts);
+//middle ware config session
+app.use(
+    session({
+      secret: 'secret',
+      resave: true,
+      saveUninitialized: true,
+      cookie: {
+        maxAge: 6000 },
+    })
+  );
+  //config flash
+  app.use(flash());
+  //config cookie
+  app.use(cookieParser('secret'));
 
  
 
@@ -25,7 +44,7 @@ try {
 
 export const createProduct = async (req,res)=>{
     try {
-        res.json(req.body)
+        // res.json(req.body)
         await product.create(req.body);
         res.redirect('/product')
     } catch (error) {
