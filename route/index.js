@@ -12,6 +12,7 @@ import cookieParser from "cookie-parser";
 import flash from "connect-flash";
 import {body,check} from "express-validator";
 import product from "../models/data.js"
+// import { Sequelize } from "sequelize";
 
 const app = express();
 const router = express.Router();
@@ -36,7 +37,18 @@ router.get('/',getAllproduct);
 router.get('/:id',getProductbyId);
 router.post('/',[
     body('nama_barang').custom((value)=>{
-    const duplikat = cari(value);
+    const a = (req,res)=>{
+      await product.findAll({
+        where :{
+          nama_barang : req.body.nama_barang
+        }
+      })
+    }
+    console.log(a);
+    // if(duplikat){
+    //   throw new Error('nama sudah ada');
+    // }
+    // return true
     })
 ],createProduct);
 router.patch('/:id',updateProduct);

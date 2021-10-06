@@ -1,7 +1,7 @@
 import product from "../models/data.js";
 import express from 'express';
 import expressLayouts from 'express-ejs-layouts';
-import {body,check} from "express-validator";
+import {body,check, validationResult} from "express-validator";
 import session from "express-session";
 import cookieParser from "cookie-parser";
 import flash from "connect-flash";
@@ -43,14 +43,23 @@ try {
 }
 
 export const createProduct = async (req,res)=>{
-    try {
-        // res.json(req.body)
-        await product.create(req.body);
-        res.redirect('/product')
-    } catch (error) {
-        console.log(error)
-    }
-    }
+    const errors = validationResult(req)
+    // if(!errors.isEmpty()){
+    //     res.render('form',{
+    //         title : "form-tambah",
+    //         layout : "layouts/main-layout",
+    //         errors : errors.array()
+    //     })
+    // }else{
+    //     try {
+    //         // res.json(req.body)
+    //         await product.create(req.body);
+    //         res.redirect('/product')
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
+}
 
 export const getProductbyId = async (req,res)=>{
     try {

@@ -8,7 +8,7 @@ app.use(expressLayouts);
 
 export const formTambah = (req,res)=>{
     res.render('form',{
-        title : "fotm tambah",
+        title : "form tambah",
         layout : "layouts/main-layout"
     })
 }
